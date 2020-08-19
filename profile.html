@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/offcanvas/">
+	<link href="public/css/offcanvas.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="public/css/profile.css">
+	<script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+	<script type="text/javascript" src="public/js/firebase-app.js"></script>
+	<script>
+	   firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		  	var displayName = user.displayName,
+		  		emailId = user.email,
+		  		photoURL = user.photoURL;
+		    // document.getElementById('emailId').innerHTML = emailId;
+		    // document.getElementById('displayName').innerHTML = displayName;
+		    document.getElementById('displayPic').src = photoURL;
+		  } else {
+		    console.log("No user is signed in.");
+		  }
+		});
+	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="public/js/functions.js"></script>
+	<script type="text/javascript" src="public/js/app.js"></script>
+</head>
+<body style="background-color: rgba(240, 240, 240, .5);">
+<div id="circle">
+  <div class="loader">
+    <div class="loader">
+        <div class="loader">
+           <div class="loader">
+
+           </div>
+        </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;E-Cart</a>
+	<div class="justify-content-end">
+	</div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+			<!-- <li class="nav-item dropdown" style="margin-top: -5px;margin-right: 25px">
+				<span class="badge badge-light" id="productCount"></span>
+	 			 <a id="myCart" href="cart.html" style="font-size: 40px;"><i class="fa fa-shopping-cart"></i></a>
+			</li> -->
+     <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+      	<img src="" id="displayPic">
+  	  </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="#" onclick="socialLogin.signOut();">Logout</a>
+      </div>
+    </li>
+    </ul>
+  </div>
+</nav>
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline">
+    <a class="nav-link active" href="#">Dashboard</a>
+    <a class="nav-link" href="cart.html">
+      My Cart
+      <span class="badge badge-pill bg-light align-text-bottom" id="productCount"></span>
+    </a>
+  </nav>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3">
+			<b><p class="text-center" style="padding-top: 40px;">Filter Search Results
+			<a href="#collapsibleFilter" data-toggle="collapse"><i class="fa fa-filter"></i></a>
+			</p></b>
+			<br>
+			<div class="collapse in"  id="collapsibleFilter">
+				<div id="name-filter">
+				<label for="search">By Name:</label><br>
+				<input type="search" name="search" id="search" placeholder="Filter By Name" oninput="filterByName();">
+				</div>
+				<div id="price-filter">
+					<label for="search">By Price:</label><br>
+					<span>
+						<input type="search" name="min-price" id="min-price" placeholder="Min Price" oninput="filterByPrice();"> - 
+						<input type="search" name="max-price" id="max-price" placeholder="Max Price" oninput="filterByPrice();">  
+					</span>
+					<br>
+					<br>
+					<input type="range" min="1" max="36" value="35.95" class="slider" id="priceRange" step="2.5" oninput="filterByPrice();">
+					<i><p style="font-size: 12px">[ Slide right to increase the price, the slide will set the max price range ]<br><!-- <span id="priceValue"></span> --></p></i>
+				</div>
+				<div class="slidecontainer">
+				  <label for="myRange">By Rating:</label>&nbsp;&nbsp;<br>
+				  <input type="range" min="1" max="5" value="5" class="slider" id="myRange" step=".25" oninput="filterByRating();">
+				  <i><p style="font-size: 12px">[ Please note the rating you choose specifies max range ]<br><!-- <span id="demo"></span> --></p></i>
+				</div>
+		  	</div>
+		</div>
+		<div class="col-sm-9">
+			<div id="notFound" class="button-glow">
+	        </div>
+		
+			<div id="cards" style="display: inline-block"> 
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
